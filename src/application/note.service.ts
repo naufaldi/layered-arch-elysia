@@ -22,7 +22,7 @@ class NoteService {
     this.logger.info('getAll');
     return this.noteRepo.getAll();
   }
-  getOneById(id: string) {
+  getOneById(id: number) {
     this.logger.info('getOneById');
     return this.noteRepo.getOneById(id);
   }

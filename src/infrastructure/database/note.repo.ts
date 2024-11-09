@@ -3,6 +3,7 @@ import { INote } from '../../interfaces/entities';
 import { Note } from '../../interfaces/entities';
 //  for read the metadata
 import 'reflect-metadata';
+import { prisma } from '../../utils/prisma';
 
 // using inversify for injectable
 @injectable()
@@ -11,17 +12,17 @@ class NoteRepo implements INote {
     // logic how you get data from DB
     // get data from prisma
     // create from prisma
-    return [];
+    return await prisma.note.findMany();
   }
 
-  async getOneById(id: string): Promise<Note> {
+  async getOneById(id: number): Promise<Note | null> {
     // logic how you get data from DB
     // get data from prisma
-    return {
-      id: '1',
-      isDone: false,
-      content: 'test',
-    } as Note;
+    return await prisma.note.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   async create(data: Omit<Note, 'id'>): Promise<Note> {
