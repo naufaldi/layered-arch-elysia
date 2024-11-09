@@ -1,6 +1,11 @@
+import { injectable } from 'inversify';
 import { INote } from '../../interfaces/entities';
 import { Note } from '../../interfaces/entities';
+//  for read the metadata
+import 'reflect-metadata';
 
+// using inversify for injectable
+@injectable()
 class NoteRepo implements INote {
   async getAll(): Promise<Note[]> {
     // logic how you get data from DB
